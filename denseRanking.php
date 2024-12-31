@@ -8,6 +8,7 @@ function denseRanking($scores, $gitsScores) {
 
     $currentRank = 1; 
 
+    // Penetapan peringkat pada setiap skor
     foreach ($scores as $index => $score) {
         if ($index > 0 && $score != $scores[$index - 1]){
             $currentRank++;            
@@ -16,13 +17,14 @@ function denseRanking($scores, $gitsScores) {
         $rankings[$score] = $currentRank;
     }
 
+    // inisialisasi ranking GITS
     $gitsRanks = [];
     
     foreach ($gitsScores as $gitsScore) {
         if  (isset($rankings[$gitsScore])) {
             $gitsRanks[] = $rankings[$gitsScore];
         } else {
-            $gitsRanks[] = max($rankings) + 1;
+            $gitsRanks[] = max($rankings) + 1; // jika score tidak di temukan di daftar, rank naik 1 dari rank tertinggi
         }
     }
 
